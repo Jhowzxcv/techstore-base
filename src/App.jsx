@@ -17,6 +17,7 @@ export default function App() {
   const [carrinho, setCarrinho] = useState([])
   const [clientes, setClientes] = useState([])
   const [clienteAtualId, setClienteAtualId] = useState(null)
+  const [listaEspera, setListaEspera] = useState([])
 
   useEffect(() => {
     buscarProdutos()
@@ -31,14 +32,30 @@ export default function App() {
   }, [])
 
   function adicionarAoCarrinho(produto) {
-    setCarrinho(carrinho.concat(produto))
+    if (!produto || !Number.isFinite(Number(produto.price)) || produto.estoque === 0) {
+      return
+    }
+
+    setCarrinho((carrinhoAtual) => carrinhoAtual.concat(produto))
+  }
+
+  function adicionarNaListaEspera({ produtoId, nome, email }) {
+    setListaEspera((itens) => [
+      ...itens,
+      {
+        id: crypto.randomUUID(),
+        produtoId,
+        nome,
+        email,
+      },
+    ])
   }
 
   function removerUmaUnidade(produtoId) {
     // Remove só a primeira unidade encontrada do produto
     let removido = false
-    setCarrinho(
-      carrinho.filter((produto) => {
+    setCarrinho((carrinhoAtual) =>
+      carrinhoAtual.filter((produto) => {
         if (!removido && produto.id === produtoId) {
           removido = true
           return false
@@ -67,7 +84,13 @@ export default function App() {
             />
             <Route
               path="/produto/:id"
-              element={<PaginaProduto produtos={produtos} onAdicionar={adicionarAoCarrinho} />}
+              element={
+                <PaginaProduto
+                  produtos={produtos}
+                  onAdicionar={adicionarAoCarrinho}
+                  onNotificar={adicionarNaListaEspera}
+                />
+              }
             />
             <Route
               path="/carrinho"
@@ -81,7 +104,7 @@ export default function App() {
                 />
               }
             />
-            <Route path="/estoque" element={<Estoque produtos={produtos} />} />
+            <Route path="/estoque" element={<Estoque produtos={produtos} listaEspera={listaEspera} />} />
           </Routes>
         )}
       </main>
