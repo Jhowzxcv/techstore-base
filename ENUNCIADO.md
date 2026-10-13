@@ -16,6 +16,12 @@ Você assumiu a manutenção da TechStore, uma loja virtual em React que já est
 
 ## Obrigatório 1: Total do carrinho
 
+[✓] Resolvido.
+
+Correção: a soma do carrinho foi ajustada para normalizar preços vindos da API, ignorar valores ausentes e somar corretamente cada unidade. Isso corrige valores incoerentes em combinações como Carregador Turbo + Copo Térmico e Camiseta Estampada + Tênis Casual.
+
+Observação de UX: também foi incluído um indicador numérico de itens no cabeçalho do carrinho para confirmar visualmente que a ação de adicionar teve efeito.
+
 **Mensagem do dono da loja, 6 de outubro**
 
 > Alguns clientes estão vendo valores sem sentido no total do carrinho. O atendimento me mandou dois casos:
@@ -31,6 +37,10 @@ Você assumiu a manutenção da TechStore, uma loja virtual em React que já est
 
 ## Obrigatório 2: Produtos esgotados
 
+[✓] Resolvido.
+
+Correção: produtos com estoque zero e sem preço válido foram removidos da vitrine, enquanto o produto esgotado mantém um fluxo de espera com nome e e-mail; a área interna exibe a fila de espera por item.
+
 **Mensagem do comercial, 7 de outubro**
 
 > Os clientes ficam frustrados quando encontram um produto que gostaram e ele está esgotado. A partir de agora, produto esgotado não aparece mais na loja.
@@ -44,6 +54,12 @@ Você assumiu a manutenção da TechStore, uma loja virtual em React que já est
 ## Grupo 1 (escolha 1)
 
 ### A. Botão de adicionar ao carrinho
+
+[✓] Resolvido.
+
+Correção: o estado do carrinho foi ajustado para adicionar uma unidade por clique e bloquear produtos inválidos ou esgotados. Isso evita duplicação por clique repetido e impediu que a mesma camiseta entrasse várias vezes.
+
+Observação de UX: o contador no ícone do carrinho também passou a refletir a quantidade real de itens adicionados.
 
 **Mensagem do atendimento, 9 de outubro**
 
@@ -70,6 +86,10 @@ Você assumiu a manutenção da TechStore, uma loja virtual em React que já est
 > Quero uma página só para mim, com acesso pelo menu, para acompanhar a loja. Preciso saber quanto dinheiro tenho parado em estoque em cada categoria, ou seja, quanto eu receberia se vendesse tudo hoje. Quero ver também o que está parado esperando o preço do time de suprimentos e quantos clientes estão esperando produtos esgotados voltarem. E quero ver quanto estou lucrando em cada categoria. Ah, e quero que a página tenha a cara da loja.
 
 ### D. Card de produto
+
+[✓] Resolvido.
+
+Correção: o card foi padronizado para a mesma estrutura usada na lista e em produtos relacionados/sugestões; a mensagem de frete grátis foi ajustada para mostrar quanto falta para atingir o valor mínimo final de R$ 200.
 
 **Mensagem do time de produto, 10 de outubro**
 
