@@ -11,13 +11,17 @@ const CATEGORIAS = [
 
 export default function Loja({ produtos, onAdicionar }) {
   const [categoria, setCategoria] = useState('todas')
-  const [produtosVisiveis, setProdutosVisiveis] = useState(produtos)
+  const [produtosVisiveis, setProdutosVisiveis] = useState([])
 
   useEffect(() => {
+    const disponiveis = produtos.filter(
+      (produto) => Number.isFinite(Number(produto.price)) && Number(produto.estoque) > 0
+    )
+
     if (categoria === 'todas') {
-      setProdutosVisiveis(produtos)
+      setProdutosVisiveis(disponiveis)
     } else {
-      setProdutosVisiveis(produtos.filter((produto) => produto.category === categoria))
+      setProdutosVisiveis(disponiveis.filter((produto) => produto.category === categoria))
     }
   }, [categoria, produtos])
 
